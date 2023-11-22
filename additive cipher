@@ -1,0 +1,39 @@
+#include <ctype.h>
+
+void encrypt(char message[], int shift);
+
+int main() {
+    char message[100];
+    int shift;
+
+    // Input message from the user
+    printf("Enter a message to encrypt: ");
+    fgets(message, sizeof(message), stdin);
+
+    // Input the shift value
+    printf("Enter the shift value: ");
+    scanf("%d", &shift);
+
+    // Call the encrypt function
+    encrypt(message, shift);
+
+    // Output the encrypted message
+    printf("Encrypted message: %s\n", message);
+
+    return 0;
+}
+
+void encrypt(char message[], int shift) {
+    int i;
+
+    for (i = 0; message[i] != '\0'; ++i) {
+        if (isalpha(message[i])) {
+            // Check if the character is uppercase or lowercase
+            if (isupper(message[i])) {
+                message[i] = (message[i] + shift - 'A') % 26 + 'A';
+            } else {
+                message[i] = (message[i] + shift - 'a') % 26 + 'a';
+            }
+        }
+    }
+}
